@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>akan name</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css" >
+</head>
+<body>
+<div class="container">
+<div class="header">
+    <h3>Akan Name Calculator</h3>
+    <p>Akan names are derived from Ghanian culture corresponding to the day of the week they were born.
+      This application is a simple web app that generates an Akan name based on the date of birth and 
+      gender by determining the day one was born.
+      For our case,when one enters the day,month and year he or she was born,it calculates the day of the week 
+      that the person was born in Ghanian language.
+    </p>
+
+
+<div class="formCard">
+  
+<!-- <form> -->
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Date</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="date">
+      <p class="bg-danger" id="dateerror" style="color: #fff;"></p>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Month</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="month">
+      <p class="bg-danger" id="montherror" style="color: #fff;"></p>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Year</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="year">
+    </div>
+  </div>
+
+  <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gender1" value="male" >
+          <label class="form-check-label" for="gridRadios1">
+            Male
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gender2" value="female">
+          <label class="form-check-label" for="gridRadios2">
+            Female
+          </label>
+        </div>
+        
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="button">
+      <button type="submit" class="btn btn-primary" onclick="Calculate()">Submit</button>
+  </div>
+<!-- </form> -->
+<div class="displayAkan">
+<h5>Your Akan Name Is</h5>
+<p class="bg-success" id="displayAkan"></p>
+</div>
+
+</div>
+</div>
+
+
+<script>
+
+function Calculate() 
+{
+    if(document.getElementById("date").value<=0 || document.getElementById("date").value>31)
+    {
+        document.getElementById("dateerror").innerHTML = "Enter a valid date!";
+    }
+    else
+    {
+        DD = document.getElementById("date").value;
+        document.getElementById("dateerror").innerHTML = "";
+
+        if(document.getElementById("month").value<1 || document.getElementById("month").value>12)
+        {
+            document.getElementById("montherror").innerHTML = "Enter a valid month!";
+        }
+        else
+        {
+            document.getElementById("montherror").innerHTML = "";
+
+            MM = document.getElementById("month").value;
+            year = document.getElementById("year").value;
+
+            if (document.getElementById("gender1").checked) 
+                {
+                    gender = document.getElementById("gender1").value;
+                }
+            if (document.getElementById("gender2").checked) 
+                {
+                    gender = document.getElementById("gender2").value;
+                }
+
+                var digits = year.toString().split('');
+                var singleDigits = year.toString().split('');
+                var firstNumber = singleDigits[0];
+                var secondNumber = singleDigits[1];
+                var thirdNumber = singleDigits[2];
+                var fourthNumber = singleDigits[3];
+
+                var CC = firstNumber.concat(secondNumber);
+                var YY = thirdNumber.concat(fourthNumber);
+
+                d = ( ( (CC/4) -2*CC-1) + ((5*YY/4) ) + ((26*(MM+1)/10)) + DD ) % 7;
+                
+                
+                d = Math.round(d);
+                if(gender == "male")
+                {
+                    akanNames = ["Kwasi","Kwadwo","Kwabena","Kwaku","Yaw","Kofi","Kwame"];
+                    result = akanNames[d];
+                    document.getElementById("displayAkan").innerHTML = result;
+                }
+                else if(gender == "female")
+                {
+                    akanNames=["Akosua","Adwoa","Abenaa","Akua","Yaa","Afua","Ama"];
+                    result = akanNames[d];
+                    document.getElementById("displayAkan").innerHTML = result;
+                }
+
+        }
+        
+    }
+    
+}
+</script>
+</body>
+</html>
